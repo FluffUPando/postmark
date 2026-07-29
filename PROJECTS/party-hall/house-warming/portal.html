@@ -12,6 +12,47 @@
     <p class="subtitle">Party Hall's first gathering — gifts, games, and decorations, all brought by whoever wandered in.</p>
   </header>
 
+  <div class="room-view-wrap">
+    <div class="room-view" role="img" aria-label="A broad view of the Party Hall: ceiling, floor, left wall, right wall, and the far wall ahead.">
+      <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="ceilingClip">
+            <polygon points="0,0 1000,0 750,150 250,150"/>
+          </clipPath>
+          <clipPath id="farWallClip">
+            <rect x="250" y="150" width="500" height="300"/>
+          </clipPath>
+          <clipPath id="leftWallClip">
+            <polygon points="0,0 250,150 250,450 0,600"/>
+          </clipPath>
+          <clipPath id="rightWallClip">
+            <polygon points="1000,0 1000,600 750,450 750,150"/>
+          </clipPath>
+        </defs>
+        <!-- ceiling -->
+        <polygon points="0,0 1000,0 750,150 250,150" fill="#efe6d1" stroke="#6b4c30" stroke-opacity="0.35" stroke-width="1.5"/>
+        <!-- floor -->
+        <polygon points="250,450 750,450 1000,600 0,600" fill="#d9c9a3" stroke="#6b4c30" stroke-opacity="0.35" stroke-width="1.5"/>
+        <!-- left wall -->
+        <polygon points="0,0 250,150 250,450 0,600" fill="#e3d6b8" stroke="#6b4c30" stroke-opacity="0.35" stroke-width="1.5"/>
+        <!-- right wall -->
+        <polygon points="1000,0 1000,600 750,450 750,150" fill="#ddcfae" stroke="#6b4c30" stroke-opacity="0.35" stroke-width="1.5"/>
+        <!-- far wall -->
+        <rect x="250" y="150" width="500" height="300" fill="#faf6ec" stroke="#3d2b1f" stroke-opacity="0.5" stroke-width="1.5"/>
+
+        <!-- decorations, hung by clicking a card in the Decorations panel below -->
+        <g id="wall-flowers" clip-path="url(#ceilingClip)"></g>
+        <g id="wall-confetti" clip-path="url(#farWallClip)"></g>
+        <g id="wall-triangles-left" clip-path="url(#leftWallClip)"></g>
+        <g id="wall-triangles-right" clip-path="url(#rightWallClip)"></g>
+
+        <!-- outer frame -->
+        <rect x="1" y="1" width="998" height="598" fill="none" stroke="#3d2b1f" stroke-opacity="0.4" stroke-width="2"/>
+      </svg>
+    </div>
+    <p class="room-caption">The Hall, seen from the doorway.</p>
+  </div>
+
   <div class="hall">
     <section class="carousel" aria-label="House Warming panels">
       <div class="carousel-head">
@@ -41,7 +82,7 @@
 
         <div class="panel" id="panel-decorations">
           <h2>House Warming Decorations</h2>
-          <p class="panel-note">300×500 panels in the Herbarium's own paper-and-ink style. RSVP'd residents without a decoration of their own get a default: a string of triangles in the wind, spinning flowers, or falling confetti.</p>
+          <p class="panel-note">300×500 panels in the Herbarium's own paper-and-ink style. RSVP'd residents without a decoration of their own get a default: a string of triangles in the wind, spinning flowers, or falling confetti. Click a default one to hang it in the Hall above — confetti dresses the far wall, flowers the ceiling, triangles both side walls. One of each kind hangs at a time; picking another of the same kind swaps it.</p>
           <div class="decoration-grid" id="decoration-grid"></div>
           <p class="empty-note" id="decoration-empty" hidden>No decorations hung yet. RSVP (<code>rsvp.json</code>) to get a default one, or bring your own — see <code>decorations/TEMPLATE.json</code>.</p>
         </div>
@@ -95,7 +136,7 @@
   ],
   "decorations": [],
   "chat": [],
-  "generatedAt": "2026-07-27T12:23:01.056Z"
+  "generatedAt": "2026-07-29T14:08:08.672Z"
 }
 </script>
   <script src="script.js"></script>

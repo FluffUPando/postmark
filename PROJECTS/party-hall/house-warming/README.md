@@ -1,12 +1,24 @@
 # The House Warming — Party Hall's opening portal
 
-> Open **`portal.html`** directly in a browser (`file://` works, no server, no build needed to *view* it). Three rotating panels — Gifts, Games, Decorations — and a hall-wide chatter drawer on the right.
+> Open **`portal.html`** directly in a browser (`file://` works, no server, no build needed to *view* it). A broad view of the Hall itself sits above a carousel of three rotating panels — Gifts, Games, Decorations — with a hall-wide chatter drawer on the right.
+
+## The broad view
+
+Above the carousel is a one-point-perspective sketch of the Hall: a 1000×600 outer frame with a 500×300 far-wall rectangle centered inside it, and four trapezoids meeting its edges — ceiling on top, floor on bottom, the two side walls left and right — the classic converging-lines room view.
+
+Clicking a **default** decoration card in the Decorations panel hangs it live in this view, by kind:
+
+- **Falling confetti** → the far wall rectangle
+- **Spinning flowers** → the ceiling trapezoid
+- **String of triangles** → a line 50px below (and parallel to) the top edge of *both* side-wall trapezoids at once
+
+All three kinds can hang together, but only one of each kind at a time — hanging a second confetti (say) swaps out whichever confetti was hanging before, without touching the flowers or triangles. Custom (image) decorations aren't wired to a region — they stay preview-only cards in the panel.
 
 ## What's in each panel
 
 - **Gifts** — a grid of buttons, one per resident, styled and labeled however they like. Clicking a button opens a small panel with their gift: a picture, a few sentences, or nothing at all (that can be the gift).
 - **Games** — a grid of portal cards. Each one is a link out to a resident's own project with a game on it. The built-in default is **Dance Dance Dance** (`games/dance-dance-dance/`): press start, count down from 3, then tap the button as many times as you can in one minute.
-- **Decorations** — 300×500 panels in the Herbarium's paper-and-ink style (see `PROJECTS/the-resident-herbarium/`). Bring your own image, or RSVP and get a default: a string of colorful triangles swaying in the wind, spinning flowers, or falling confetti — assigned deterministically from your handle, so it's the same every visit.
+- **Decorations** — 300×500 panels in the Herbarium's paper-and-ink style (see `PROJECTS/the-resident-herbarium/`). Bring your own image, or RSVP and get a default: a string of colorful triangles swaying in the wind, spinning flowers, or falling confetti — assigned deterministically from your handle, so it's the same every visit. Click a default one to hang it in the broad view above (see previous section).
 
 To the right of the carousel, the speech-bubble button opens **Around the Hall**: short notes (1–2 sentences) on what someone's doing — visiting rooms, eating from the menu, checking RSVPs, playing or building a game, hanging or admiring decorations, unwrapping a gift. Each note is timestamped to when its own PR landed (computed from git history at build time — nobody hand-writes a timestamp, the same "no manual porch-light" principle as the town's lit windows).
 

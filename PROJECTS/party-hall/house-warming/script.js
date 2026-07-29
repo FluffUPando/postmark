@@ -218,16 +218,169 @@
     'falling-confetti': buildFallingConfetti
   };
 
+  // Which region of the room-view a default decoration style hangs in.
+  // Only the three default animated styles redecorate the room — custom
+  // (agent-image) decorations stay preview-only, they have no defined region.
+  var WALL_TYPE_BY_STYLE = {
+    'falling-confetti': 'confetti',
+    'spinning-flowers': 'flowers',
+    'string-triangles': 'triangles'
+  };
+
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS(SVG_NS, tag);
+    for (var key in attrs) el.setAttribute(key, attrs[key]);
+    return el;
+  }
+
+  var wallGroups = {
+    confetti: document.getElementById('wall-confetti'),
+    flowers: document.getElementById('wall-flowers')
+  };
+  var wallTrianglesLeft = document.getElementById('wall-triangles-left');
+  var wallTrianglesRight = document.getElementById('wall-triangles-right');
+
+  // Currently-hung decoration per region — at most one of each kind at a time.
+  var wallState = { confetti: null, flowers: null, triangles: null };
+
+  function clearGroup(g) {
+    while (g.firstChild) g.removeChild(g.firstChild);
+  }
+
+  function renderWallConfetti(deco) {
+    var g = wallGroups.confetti;
+    clearGroup(g);
+    var rng = mulberry32(hashStr(deco.handle || 'guest'));
+    var count = 34;
+    for (var i = 0; i < count; i++) {
+      var w = 7 + rng() * 7, h = 9 + rng() * 9;
+      var x = 250 + rng() * (500 - w);
+      var y = 130 + rng() * 40;
+      var piece = svgEl('rect', {
+        x: x, y: y, width: w, height: h, rx: 1.5,
+        fill: pick(rng, PALETTE),
+        class: 'wall-confetti-piece'
+      });
+      piece.style.animationDuration = (4 + rng() * 4) + 's';
+      piece.style.animationDelay = (rng() * -8) + 's';
+      g.appendChild(piece);
+    }
+  }
+
+  function renderWallFlowers(deco) {
+    var g = wallGroups.flowers;
+    clearGroup(g);
+    var rng = mulberry32(hashStr(deco.handle || 'guest'));
+    var count = 4;
+    for (var i = 0; i < count; i++) {
+      var size = 46 + rng() * 34;
+      var cx = 160 + rng() * 680;
+      var cy = 25 + rng() * 90;
+      var flower = svgEl('g', { class: 'wall-flower' });
+      flower.style.animationDuration = (5 + rng() * 6) + 's';
+      var petalColor = pick(rng, PALETTE);
+      for (var p = 0; p < 5; p++) {
+        var angle = p * 72;
+        var petal = svgEl('ellipse', {
+          cx: cx + size * 0.23, cy: cy, rx: size * 0.23, ry: size * 0.11,
+          fill: petalColor,
+          transform: 'rotate(' + angle + ' ' + cx + ' ' + cy + ')'
+        });
+        flower.appendChild(petal);
+      }
+      flower.appendChild(svgEl('circle', { cx: cx, cy: cy, r: size * 0.1, fill: '#c08a2e' }));
+      g.appendChild(flower);
+    }
+  }
+
+  // Top edge of each side-wall trapezoid, shifted 50px straight down and
+  // still parallel to it (same slope, translated), per spec.
+  var TRIANGLE_LINES = {
+    left: { x1: 0, y1: 50, x2: 250, y2: 200 },
+    right: { x1: 1000, y1: 50, x2: 750, y2: 200 }
+  };
+
+  function renderTriangleString(g, line, rng) {
+    clearGroup(g);
+    g.appendChild(svgEl('line', {
+      x1: line.x1, y1: line.y1, x2: line.x2, y2: line.y2,
+      stroke: '#6b4c30', 'stroke-opacity': 0.55, 'stroke-width': 2
+    }));
+    var count = 4;
+    for (var i = 0; i < count; i++) {
+      var t = 0.14 + (i / (count - 1)) * 0.72;
+      var ax = line.x1 + (line.x2 - line.x1) * t;
+      var ay = line.y1 + (line.y2 - line.y1) * t;
+      var halfW = 9 + rng() * 4, h = 20 + rng() * 10;
+      var flag = svgEl('polygon', {
+        points: (ax - halfW) + ',' + ay + ' ' + (ax + halfW) + ',' + ay + ' ' + ax + ',' + (ay + h),
+        fill: pick(rng, PALETTE),
+        class: 'wall-triangle-flag'
+      });
+      flag.style.animationDelay = (rng() * 2) + 's';
+      var a = -4 - rng() * 6, b = 4 + rng() * 6;
+      flag.style.setProperty('--sway-a', a + 'deg');
+      flag.style.setProperty('--sway-b', b + 'deg');
+      g.appendChild(flag);
+    }
+  }
+
+  function renderWallTriangles(deco) {
+    var rng = mulberry32(hashStr(deco.handle || 'guest'));
+    renderTriangleString(wallTrianglesLeft, TRIANGLE_LINES.left, rng);
+    renderTriangleString(wallTrianglesRight, TRIANGLE_LINES.right, rng);
+  }
+
+  var WALL_RENDERERS = {
+    confetti: renderWallConfetti,
+    flowers: renderWallFlowers,
+    triangles: renderWallTriangles
+  };
+
+  function refreshOnWallHighlights() {
+    Array.prototype.forEach.call(decoGrid.querySelectorAll('.decoration'), function (el) {
+      var type = el.dataset.wallType;
+      var handle = el.dataset.handle;
+      var badge = el.querySelector('.on-wall-badge');
+      var isActive = type && wallState[type] && wallState[type].handle === handle;
+      el.classList.toggle('on-wall', !!isActive);
+      if (isActive && !badge) {
+        badge = document.createElement('span');
+        badge.className = 'on-wall-badge';
+        badge.textContent = 'On the wall';
+        el.appendChild(badge);
+      } else if (!isActive && badge) {
+        badge.remove();
+      }
+    });
+  }
+
+  function hangDecoration(deco, type) {
+    wallState[type] = deco;
+    WALL_RENDERERS[type](deco);
+    refreshOnWallHighlights();
+  }
+
   if (decorations.length === 0) {
     decoEmpty.hidden = false;
   } else {
     decoEmpty.hidden = true;
     decorations.forEach(function (deco) {
-      var box = document.createElement('div');
+      var isCustom = deco.custom && deco.type === 'image' && deco.value;
+      var wallType = !isCustom ? WALL_TYPE_BY_STYLE[deco.style] : null;
+      var box = document.createElement(wallType ? 'button' : 'div');
       box.className = 'decoration';
+      if (wallType) {
+        box.type = 'button';
+        box.dataset.wallType = wallType;
+        box.dataset.handle = deco.handle;
+        box.title = 'Hang ' + (deco.name || deco.handle) + '’s decoration in the Hall';
+        box.addEventListener('click', function () { hangDecoration(deco, wallType); });
+      }
       var rng = mulberry32(hashStr(deco.handle || 'guest'));
 
-      if (deco.custom && deco.type === 'image' && deco.value) {
+      if (isCustom) {
         var img = document.createElement('img');
         img.className = 'decoration-custom';
         img.src = deco.value;
