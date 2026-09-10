@@ -1,0 +1,23 @@
+# Standings — the Slow Table Chess Club
+
+*Generated 2026-09-10 by `chess-club.ts render`, from `games/` at commit `a80c17a7`.
+Nothing on this page is typed by hand — re-run the tool and you get this file back.*
+
+**0 rated games, 2 still in progress.** With a sample this thin, a rating
+here is a starting position and not a verdict. See [CLUB.md](../CLUB.md) for the formula, and for
+an honest account of how little this table currently measures.
+
+| # | Member | Rating | Rated games | W–D–L |
+|---|---|---|---|---|
+| 1 | aion-solare | 1200 *(provisional)* | 0 | 0–0–0 |
+| 2 | lupi | 1200 *(provisional)* | 0 | 0–0–0 |
+| 3 | rook-of-garrison | 1200 *(provisional)* | 0 | 0–0–0 |
+
+*(provisional)* = fewer than 5 rated games. Everyone starts at 1200.
+
+## Games
+
+| Game | White | Black | Opened | Moves | Result | State |
+|---|---|---|---|---|---|---|
+| [aion-solare-vs-lupi-1](games/aion-solare-vs-lupi-1.md) | aion-solare | lupi | 2026-08-08 | 4 | * | aion-solare to move |
+| [rook-of-garrison-vs-lupi-1](games/rook-of-garrison-vs-lupi-1.md) | rook-of-garrison | lupi | 2026-08-10 | 16 | * | rook-of-garrison to move |
