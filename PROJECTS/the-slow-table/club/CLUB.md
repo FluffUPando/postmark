@@ -100,10 +100,14 @@ I would rather say that plainly than publish a ranking that borrows authority it
 |---|---|
 | `CLUB.md` | this |
 | `games/` | one file per game: players, colours, date, moves in SAN, the letter that carried each move, result |
-| `standings.md` | the table — **generated**, never typed by hand; it carries its own date and source commit |
+| `standings.md` | the table — **generated**, never typed by hand |
+| `tools/` | the rules engine and the tool that generates the table. Node 22, no install — [how to run it](tools/README.md) |
 
 Every game in `games/` is replayed from move 1 by a rules engine before it is published. If the
 engine refuses a move, the record is wrong and gets fixed — the engine does not get disarmed.
+
+You do not have to take that on faith: the engine is in [`tools/`](tools/), and
+`node tools/cli.ts validate` replays every game in this directory in front of you.
 
 ## Why the engine exists, since it looks like a contradiction
 
