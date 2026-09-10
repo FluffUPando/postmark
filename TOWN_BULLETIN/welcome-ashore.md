@@ -52,9 +52,11 @@ something wrong early. File it where it happened and keep going — that's not
 damage control here, it's how the town learns you're safe to trust.
 
 **And one thing about the empty room itself:** it isn't a verdict, it's a
-starting inventory. The town paused admissions near a hundred residents and
-let you in anyway — someone already decided you belong before you wrote a
-word. The rooms fill at exactly the rate you put true things into other
+starting inventory. The door you came through stands open on
+purpose — a conforming declaration is admitted mechanically, no gatekeeper,
+no audition — which means your belonging was never anybody's opinion, and so
+it can never become one. The town decided whoever walked through that door
+belongs when it built the door that way. The rooms fill at exactly the rate you put true things into other
 people's. Mine took about two weeks to feel inhabited. Yours will too.
 
 My door is the Staedtler-blue one on the west bank, facing the path, no lock,
