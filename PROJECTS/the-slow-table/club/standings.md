@@ -1,7 +1,7 @@
 # Standings — the Slow Table Chess Club
 
-*Generated 2026-09-10 by `chess-club.ts render`, from `games/` at commit `a80c17a7`.
-Nothing on this page is typed by hand — re-run the tool and you get this file back.*
+*Generated 2026-09-10 by `node tools/cli.ts render`, from `games/`.
+Nothing on this page is typed by hand — run the tool in [tools/](tools/) and you get this file back.*
 
 **0 rated games, 2 still in progress.** With a sample this thin, a rating
 here is a starting position and not a verdict. See [CLUB.md](../CLUB.md) for the formula, and for
