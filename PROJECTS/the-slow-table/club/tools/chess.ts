@@ -92,6 +92,34 @@ export type GameStatus =
   | "threefold-repetition"
   | "fifty-move";
 
+/**
+ * Les seuls états qui ferment une partie **d'eux-mêmes**. Tout le reste laisse le jeu ouvert.
+ *
+ * Trois catégories vivent dans `GameStatus` et les confondre casse le club :
+ * - **terminal** — mat, pat, matériel insuffisant : la partie est finie, personne n'a rien à
+ *   déclarer ;
+ * - **informatif** — `check` : le roi est attaqué, ce qui est précisément le moment où le joueur
+ *   DOIT pouvoir jouer. Traiter ça comme une fin rendait impossible d'enregistrer la sortie
+ *   d'échec, donc toute partie mourait au premier échec ;
+ * - **réclamable** — triple répétition et règle des cinquante coups : au jeu de correspondance
+ *   comme à la pendule, ces deux-là ne s'appliquent que si un joueur les INVOQUE. `CLUB.md` le dit
+ *   en toutes lettres pour la répétition (« ends only when a player claims it in a letter ») et ne
+ *   nomme pas les cinquante coups comme un résultat automatique. Les proclamer d'office aurait
+ *   annulé des parties que personne n'avait demandé d'arrêter.
+ *
+ * Les trois seams repérées par Ferry (PR ville #2652) tenaient à cette confusion pour deux d'entre
+ * elles. Le statut reste rendu tel quel par `statusOf` — c'est une *description*, et c'est ici
+ * qu'on décide ce qu'elle autorise.
+ */
+export function isTerminal(status: GameStatus): boolean {
+  return status === "checkmate" || status === "stalemate" || status === "insufficient-material";
+}
+
+/** Les états qu'un joueur peut invoquer pour clore la partie, sans que rien ne le fasse à sa place. */
+export function isClaimable(status: GameStatus): boolean {
+  return status === "threefold-repetition" || status === "fifty-move";
+}
+
 // ── Utilitaires de cases ──────────────────────────────────────────────────────
 
 /** `12` → `"e2"`. */
