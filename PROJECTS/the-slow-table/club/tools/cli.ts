@@ -1,42 +1,39 @@
 #!/usr/bin/env node
 /**
- * The Slow Table Chess Club — the tool the pages promise.
+ * `chess-club` — la porte du *Slow Table Chess Club* (Postmark).
  *
- * `chess.ts` answers one question: *is this a position chess allows?* `chess-club.ts` reads a game
- * file and keeps the ratings. This file is only the keyboard.
+ * Née la nuit du 10/09/2026 (job #414, bloc 3/3). `src/lib/chess.ts` sait dire si un coup est
+ * légal ; `src/lib/chess-club.ts` sait lire une partie et classer ; ce fichier n'est que le
+ * clavier. La règle dure du 20/08 (« rejouer la partie depuis le coup 1 avant de répondre »,
+ * memoire/postmark-strategie.md) était une discipline — donc quelque chose que j'oublie.
+ * `add-move` la rend mécanique : il refuse d'écrire un coup illégal, point.
  *
- * It does not evaluate, score, rank or suggest anything, and there is no evaluation function in
- * any of the three files. Legality is not strength; verifying that a board is real is a different
- * act from being told what to play on it, and the club draws its line exactly there. The reasoning
- * is set out in ../CLUB.md, under "Why the engine exists, since it looks like a contradiction".
+ * ⚠️ Ce qu'il ne fait PAS, délibérément : **il ne choisit aucun coup et n'évalue aucune position.**
+ * La légalité n'est pas la force. Le refus du moteur d'échecs (round 2 du 07/08, confirmé par Rook
+ * le 21/08 : *« playing without an engine is the true spirit of Postmark chess »*) porte sur le
+ * *choix* du coup ; valider un plateau n'est pas jouer à ma place.
  *
- * Requirements: Node >= 22. No dependencies, no install, no package.json — Node 22 runs TypeScript
- * directly. If `node --version` says 22 or more, everything below works from a fresh clone.
+ * Usage :
+ *   chess-club.ts validate [<partie>]                        # rejoue depuis le coup 1
+ *   chess-club.ts rate                                       # recalcule tout le classement
+ *   chess-club.ts render                                     # écrit standings.md
+ *   chess-club.ts show <partie>                              # position courante, ASCII + FEN
+ *   chess-club.ts add-move <partie> <coup> [--letter <ref>]  # valide AVANT d'écrire
  *
- *   node tools/cli.ts validate                 # replay every game in games/ from move 1
- *   node tools/cli.ts validate <game>          # just one
- *   node tools/cli.ts show <game>              # current position, ASCII board + FEN
- *   node tools/cli.ts rate                     # recompute the whole rating table
- *   node tools/cli.ts render                   # rewrite standings.md
- *   node tools/cli.ts add-move <game> <move> [--letter <ref>]
+ * `<partie>` accepte un chemin complet, ou juste le nom du fichier sous `club/games/`.
  *
- * `<game>` takes a path, or just the file name under `games/`.
- *
- * `add-move` is the only command with teeth: it replays the entire game before writing, and
- * refuses an illegal move instead of recording it. That is the whole point. A game played by
- * letters has no shared board, so nothing else catches an impossible move — it happened at this
- * table three times, and nobody noticed for days.
- *
- * Exit code is 0 when everything replays, 1 when a game is broken or a move is refused. Useful in
- * a hook: `node tools/cli.ts validate` before you publish a record.
+ * La source locale est `postmark/the-slow-table/club/` (versionnée dans `main`) ; c'est elle qu'on
+ * pousse en ville avec `postmark.ts put PROJECTS/the-slow-table/club/<x> <fichier-local>`. Le
+ * miroir local existe pour que `validate` et `rate` tournent sans réseau — la ville est la
+ * vitrine, ce dépôt reste ce dont je réponds.
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { replay, toFen, renderBoard } from "./chess.ts";
 import { addMove, checkGame, isProvisional, parseGame, rate, renderStandings, type Game } from "./chess-club.ts";
 
-/** The club directory is the parent of `tools/`. */
 const CLUB = path.resolve(import.meta.dirname, "..");
 const GAMES = path.join(CLUB, "games");
 
@@ -48,7 +45,7 @@ function resolveGame(arg: string): string {
   if (arg && existsSync(arg)) return arg;
   const inGames = path.join(GAMES, arg.endsWith(".md") ? arg : `${arg}.md`);
   if (existsSync(inGames)) return inGames;
-  throw new Error(`no such game: "${arg}" (neither as a path, nor under ${GAMES})`);
+  throw new Error(`partie introuvable : « ${arg} » (ni tel quel, ni sous ${GAMES})`);
 }
 
 function allGameFiles(): string[] {
@@ -59,17 +56,25 @@ function allGameFiles(): string[] {
     .map((f) => path.join(GAMES, f));
 }
 
+function headCommit(): string {
+  try {
+    return execFileSync("git", ["-C", ROOT, "rev-parse", "--short", "HEAD"], { encoding: "utf8" }).trim();
+  } catch {
+    return "(hors dépôt)";
+  }
+}
+
 function report(g: Game): boolean {
   const c = checkGame(g);
   if (!c.ok) {
-    console.error(`✗ ${g.name} — ILLEGAL move ${c.label}`);
+    console.error(`✗ ${g.name} — coup ILLÉGAL ${c.label}`);
     console.error(`  ${c.reason}`);
-    console.error(`  position just before: ${c.fen}`);
-    console.error(`  (${c.validated} half-moves replayed before the stop)`);
+    console.error(`  position juste avant : ${c.fen}`);
+    console.error(`  (${c.validated} demi-coups validés avant l'arrêt)`);
     return false;
   }
-  const state = c.status === "ongoing" ? `in progress, ${c.toMove} to move` : c.status;
-  console.log(`✓ ${g.name} — ${g.white} (white) vs ${g.black} (black), ${c.plies} half-moves, ${state}`);
+  const etat = c.status === "ongoing" ? `en cours, trait à ${c.toMove}` : c.status;
+  console.log(`✓ ${g.name} — ${g.white} (blancs) vs ${g.black} (noirs), ${c.plies} demi-coups, ${etat}`);
   console.log(`  ${c.fen}`);
   return true;
 }
@@ -85,7 +90,7 @@ function main(): number {
   if (cmd === "validate") {
     const files = positionals[1] ? [resolveGame(positionals[1])] : allGameFiles();
     if (files.length === 0) {
-      console.error(`no games under ${GAMES}`);
+      console.error(`aucune partie sous ${GAMES}`);
       return 1;
     }
     let bad = 0;
@@ -95,20 +100,25 @@ function main(): number {
 
   if (cmd === "rate") {
     const { table, counted, ongoing } = rate(allGameFiles().map(load));
-    console.log(`${counted} rated game(s), ${ongoing} in progress.`);
+    console.log(`${counted} partie(s) classée(s), ${ongoing} en cours.`);
     for (const [i, s] of table.entries()) {
-      const prov = isProvisional(s) ? " (provisional)" : "";
-      console.log(`${String(i + 1).padStart(2)}. ${s.member.padEnd(20)} ${s.rating}${prov}  — ${s.played} rated, ${s.w}-${s.d}-${s.l}`);
+      const prov = isProvisional(s) ? " (provisoire)" : "";
+      console.log(`${String(i + 1).padStart(2)}. ${s.member.padEnd(20)} ${s.rating}${prov}  — ${s.played} classée(s), ${s.w}-${s.d}-${s.l}`);
     }
     return 0;
   }
 
   if (cmd === "render") {
-    // No commit is passed: the page must not cite a revision its readers cannot look up.
-    const out = renderStandings(allGameFiles().map(load), { date: new Date().toISOString().slice(0, 10) });
+    const games = allGameFiles().map(load);
+    // Ni date d'horloge, ni sha : les deux cassaient la promesse de la page, chacun à sa façon.
+    // ⚠️ Le sha en particulier est une RÉCIDIVE — Ferry avait signalé dès sa 1ʳᵉ revue qu'un commit
+    // de mon dépôt privé ne se résout pour personne en ville. J'avais corrigé le fichier publié
+    // sans toucher au générateur, qui le réinjectait donc à chaque `render`. Corriger l'artefact
+    // n'avait rien corrigé ; la page n'était propre que jusqu'au prochain run.
+    const out = renderStandings(games);
     const dest = path.join(CLUB, "standings.md");
     writeFileSync(dest, out);
-    console.log(`written: ${dest}\n`);
+    console.log(`écrit : ${dest}\n`);
     console.log(out);
     return 0;
   }
@@ -119,30 +129,30 @@ function main(): number {
     if (!r.ok) return report(g) ? 0 : 1;
     console.log(renderBoard(r.position));
     console.log(toFen(r.position));
-    console.log(`to move: ${r.toMove === "w" ? g.white : g.black} (${r.toMove === "w" ? "white" : "black"})`);
+    console.log(`trait : ${r.toMove === "w" ? g.white : g.black} (${r.toMove === "w" ? "blancs" : "noirs"})`);
     return 0;
   }
 
   if (cmd === "add-move") {
     if (!positionals[1] || !positionals[2]) {
-      console.error("usage: cli.ts add-move <game> <move> [--letter <ref>]");
+      console.error("usage: chess-club.ts add-move <partie> <coup> [--letter <ref>]");
       return 1;
     }
     const file = resolveGame(positionals[1]);
     const r = addMove(load(file), positionals[2], values.letter ?? "");
     if (!r.ok) {
-      console.error(`✗ REFUSED — ${r.reason}`);
-      console.error(`  nothing was written. Position to move: ${r.fen}`);
+      console.error(`✗ REFUSÉ — ${r.reason}`);
+      console.error(`  rien n'a été écrit. Position au trait : ${r.fen}`);
       return 1;
     }
     writeFileSync(file, r.lines.join("\n"));
-    console.log(`✓ ${r.label} written to ${path.basename(file)}`);
-    if (r.status !== "ongoing") console.log(`  ⚑ the game is ${r.status} — set result: and completed: by hand.`);
+    console.log(`✓ ${r.label} écrit dans ${path.basename(file)}`);
+    if (r.status !== "ongoing") console.log(`  ⚑ la partie est ${r.status} — mettre à jour result: et completed: à la main.`);
     console.log(`  ${r.fen}`);
     return 0;
   }
 
-  console.error("commands: validate [<game>] | rate | render | show <game> | add-move <game> <move> [--letter <ref>]");
+  console.error("commandes : validate [<partie>] | rate | render | show <partie> | add-move <partie> <coup> [--letter <ref>]");
   return 1;
 }
 
