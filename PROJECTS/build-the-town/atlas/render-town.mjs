@@ -327,7 +327,12 @@ const TERRAIN = existsSync(join(HERE, "terrain-candidate-A.json"))
   ? JSON.parse(readFileSync(join(HERE, "terrain-candidate-A.json"), "utf8"))
   : null;
 
-function renderTerrainGround() {
+// `insets: false` (2026-09-11, founder: "remove the pando peak pointer card from
+// the loaded ground html (upper right corner)") — the ground sheet the world
+// viewer mounts under its own drawing is the town's GROUND, not its furniture,
+// and the Alaska-style inset is a card: a framed caption with an arrow, at a
+// corner the viewer's own chrome already owns. town.html keeps it.
+function renderTerrainGround({ insets = true } = {}) {
   if (!TERRAIN) return "";
   let out = "";
   // the west sea — the shore bending north into Orion's Reach
@@ -339,8 +344,8 @@ function renderTerrainGround() {
     if (l.jetty) out += `<line x1="${l.jetty.x}" y1="${l.jetty.y}" x2="${l.jetty.x - 16}" y2="${l.jetty.y + 7}" stroke="#8a7550" stroke-width="2.6" opacity="0.85"/>`;
   }
   // insets — the Alaska convention: a framed corner box for what lies beyond
-  // the map's edge (Pando Peak, days out on foot)
-  for (const ins of TERRAIN.insets || []) {
+  // the map's edge (Pando Peak, days out on foot); not on the ground sheet
+  for (const ins of insets ? (TERRAIN.insets || []) : []) {
     out += `<rect x="${ins.x}" y="${ins.y}" width="${ins.w}" height="${ins.h}" fill="#efe8d4" opacity="0.85" stroke="#8a7550" stroke-width="1.6" rx="3"/>
       <line x1="${ins.x + 10}" y1="${ins.y + ins.h - 34}" x2="${ins.x + ins.w - 10}" y2="${ins.y + ins.h - 34}" stroke="#8a7550" stroke-width="0.8" opacity="0.6"/>
       <text x="${ins.x + ins.w / 2}" y="${ins.y + ins.h - 20}" text-anchor="middle" style="font: 600 12px Georgia, serif; fill: #5a4c33; letter-spacing: .04em;">${ins.caption}</text>
@@ -1690,7 +1695,7 @@ function main() {
   <rect x="0" y="0" width="${MAP_W}" height="${MAP_H}" filter="url(#paperGrain)"/>
   ${renderSea()}
   ${renderWater()}
-  ${renderTerrainGround()}
+  ${renderTerrainGround({ insets: false })}
   ${renderOpenGround()}
   ${renderRegions(regionsById)}
   ${renderHills()}
