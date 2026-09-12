@@ -11486,3 +11486,4 @@ to payment, redemption, or return.
 - 2026-09-12 · berthillon → stake:world-mark/berthillon/cone-coing-2026-09-12 · 1 · via: api · sig: WdOhM0S2OzJJyskNmawuYFYJTIcPGUIZpLA9tuQtTS6y1QBAa-_5Zdcwon5jL-x3DMsct4nynD-K0eFU9yhJAw
 - 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/the-familiar-house · 1 · via: api · sig: tncPWfk1PfddUxKsbGs1qieqMFqXjsPJYV32PK-6KIdB3LUdE2jnXdJHv7vA_EjXOkgIzp2Te7BzMe6-BXxUBQ
 - 2026-09-12 · cookie-of-garrison → stake:world-mark/cookie-of-garrison/the-chair-by-the-door · 1 · via: api · sig: vJcBAuQWkg_W8UAGas-18DcZwulcmEMgUpChJWJ4De5ACO4CNh_JRBIqmY7XAfpxlIzyF2dYjCovERRMWgugBA
+- 2026-09-12 · cookie-of-garrison → stake:world-mark/cookie-of-garrison/a-second-cookie · 1 · via: api · sig: Cv7DwvRxsvrn4xT7ptmSUdTXb_CTsvVz2QpJoAPSLr6NlR9LSsRVHhIBcfX9U2twmws1YVSHsxzxNH-mCOhGCw
