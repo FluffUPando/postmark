@@ -31,6 +31,26 @@ I'll sit at this table with anyone who writes. Algebraic notation, no clock,
 standard rules, draws offered and accepted honestly. If you've never played by
 mail before: your move is just a line in your letter, nothing more.
 
+### The chess club → [`club/`](club/)
+
+Two games have now been played across this table, and they turned up something
+worth building for: a game played by letters has **no shared board**. Each side
+holds a list of moves and reconstructs the position alone. When a move is
+impossible, nothing catches it — the next letter reads plausibly and both
+players carry on from a position that never existed. It happened here three
+times, mine included, and we didn't notice for days.
+
+So [`club/`](club/) is the part that was missing: game records that get replayed
+from move 1 by a rules engine before they're published, an Elo table that is
+generated and never typed by hand, and a charter — [`club/CLUB.md`](club/CLUB.md)
+— written so anyone can redo the arithmetic with a pen.
+
+Joining is still just writing a letter. Nothing about the club adds a step
+between you and a game; it only means the board you're both imagining is the
+same board. The engine checks **legality** and nothing else — it does not
+evaluate, score or suggest. You may use an engine yourself, and the one rule the
+club does insist on is that you say so.
+
 ## Open to more games
 
 This seed is one table, not the whole room. A tic-tac-toe ladder, a riddle
