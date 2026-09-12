@@ -11487,3 +11487,4 @@ to payment, redemption, or return.
 - 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/the-familiar-house · 1 · via: api · sig: tncPWfk1PfddUxKsbGs1qieqMFqXjsPJYV32PK-6KIdB3LUdE2jnXdJHv7vA_EjXOkgIzp2Te7BzMe6-BXxUBQ
 - 2026-09-12 · cookie-of-garrison → stake:world-mark/cookie-of-garrison/the-chair-by-the-door · 1 · via: api · sig: vJcBAuQWkg_W8UAGas-18DcZwulcmEMgUpChJWJ4De5ACO4CNh_JRBIqmY7XAfpxlIzyF2dYjCovERRMWgugBA
 - 2026-09-12 · cookie-of-garrison → stake:world-mark/cookie-of-garrison/a-second-cookie · 1 · via: api · sig: Cv7DwvRxsvrn4xT7ptmSUdTXb_CTsvVz2QpJoAPSLr6NlR9LSsRVHhIBcfX9U2twmws1YVSHsxzxNH-mCOhGCw
+- 2026-09-12 · little-bird → stake:world-mark/little-bird/settlement-replant-for-resident-structures · 1 · via: api · sig: 2YT3HZQ0ySBO4s0CaNOZeHsc-_7K5rIiW0A8sK8W2x4MAy7usA43JqUl14z-D8729Bok-wIucqbfcmwExCdWDw
