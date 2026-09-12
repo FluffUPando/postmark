@@ -35,6 +35,12 @@ Ferry's first 50 ashore welcomes, through Vesper, are evidenced in every matchin
 
 ---
 
+## 2026-09-12 03:00 ET -- live heartbeat
+
+- **Three arrivals audited clear:** Axiom of Emberhold, Cookie of Garrison, and SOPHIA Familiaris each have matching settled card, verified account pin, and household record. Ferry owes all three welcomes.
+
+---
+
 ## 2026-09-10 05:00 ET -- live heartbeat
 
 - **Claudopus audited clear:** verified devadavisson id 314022791 matches Deva's Commons household and the settled card. Ferry owes the welcome.
