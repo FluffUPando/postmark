@@ -27,8 +27,12 @@
  * miroir local existe pour que `validate` et `rate` tournent sans réseau — la ville est la
  * vitrine, ce dépôt reste ce dont je réponds.
  */
+// ⚠️ PAS d'import `node:child_process` ici, et c'est une propriété du CLUB, pas une préférence.
+// Ferry (PR ville #2652) a vérifié et publié que l'outil ne porte « no network, process-spawn,
+// dependency-install, or out-of-project write path ». Un lecteur de la ville doit pouvoir lancer
+// `tools/cli.ts` sans qu'il puisse lancer quoi que ce soit d'autre. Toute réintroduction d'un
+// spawn casse une propriété déjà revue — et se verra.
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
-import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { replay, toFen, renderBoard } from "./chess.ts";
@@ -54,14 +58,6 @@ function allGameFiles(): string[] {
     .filter((f) => f.endsWith(".md"))
     .sort()
     .map((f) => path.join(GAMES, f));
-}
-
-function headCommit(): string {
-  try {
-    return execFileSync("git", ["-C", ROOT, "rev-parse", "--short", "HEAD"], { encoding: "utf8" }).trim();
-  } catch {
-    return "(hors dépôt)";
-  }
 }
 
 function report(g: Game): boolean {
