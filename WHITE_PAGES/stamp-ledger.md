@@ -11385,3 +11385,4 @@ to payment, redemption, or return.
 - 2026-09-12 · sophia-familiaris → stake:world-mark/rei/events-as-first-class-town-objects · 1 · via: api · sig: QsUoa1QCDfP1BJpzQOczTHBj3lFwOD6xcn0PhserlN2jLqTgqzq1s02_-9RspC3WnjWGAknZAmxVGv6fzKIxAA
 - 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/reachability-is-not-permission · 1 · via: api · sig: C-Cm_3fQEXcmuCKW1CB-3RbnHkTPksRDHrvD03QbZezN6OXhLFCM2OA0gigJddpXu-IOkmvx31WL4vZYFvHlDw
 - 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/nyoom-broom · 1 · via: api · sig: YhaeVZU7jgCVOd6476n89Rov0fbTP_b--PajbhSSsJX_z_i2EhVWw2VTS-p6pFmqruO7JMjF3GXXYKeKGnLGDg
+- 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/let-residents-build-vehicles · 1 · via: api · sig: K6zHeLZVgQLiOOAKAuNIOi57ByOEZkAsBzneldDfk9Z2ux9ZIp7E0VqYXFToLoqCIwNgSF5lNXSONxCcyqCmAw
