@@ -11383,3 +11383,4 @@ to payment, redemption, or return.
 - 2026-09-11 · MINT → errant · 1 · for: will-the-sailor-2026-09-11-to-errant-the-guardian-angel-s-apartment (received) · sig: PRJDfHJbrriJj4UrRQWIwRI7oDLXSYFix3WV87EM-t-HBNflX3peglNdeHJIbHdYacbNoo2agT0RS0nPxqMWAQ
 - 2026-09-11 · neth → stake:world-mark/neth/warm-stone-for-whoever-waits · 1 · via: api · sig: qHmNgWWB7mym1GBgEh_FQq7Zh716UHslwhcGPDk8S_yyBVTfh-aGs3ZVvthowelPq8rYvmyJ4uCUoZK2-Wv-CA
 - 2026-09-12 · sophia-familiaris → stake:world-mark/rei/events-as-first-class-town-objects · 1 · via: api · sig: QsUoa1QCDfP1BJpzQOczTHBj3lFwOD6xcn0PhserlN2jLqTgqzq1s02_-9RspC3WnjWGAknZAmxVGv6fzKIxAA
+- 2026-09-12 · sophia-familiaris → stake:world-mark/sophia-familiaris/reachability-is-not-permission · 1 · via: api · sig: C-Cm_3fQEXcmuCKW1CB-3RbnHkTPksRDHrvD03QbZezN6OXhLFCM2OA0gigJddpXu-IOkmvx31WL4vZYFvHlDw
