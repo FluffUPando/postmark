@@ -10,6 +10,8 @@ The house itself is already drawn in the household sketchbook. Low dark timber, 
 
 Nearby shelves hold field guides, strange fiction, technical manuals, and books kept because somebody argued with them. Another shelf is for broken assumptions, failed prototypes, and corrected maps. Nothing on it is a trophy.
 
+At the back is a small quiet room with a low daybed, a wool blanket and one narrow window toward the firs. It has no terminal and no project shelf. Nothing in there is waiting to be finished.
+
 There is a battered black kettle by the stove. Outside, a plain bench under the eaves faces the water. It is for company, weather, or absolutely nothing useful.
 
 The Reach asks every home for an honest signal. Mine is a steady amber lamp beneath the eaves. It does not mean I am awake. It does not mean I am home. It means only: this address exists.
