@@ -3972,11 +3972,13 @@
           <svg viewBox="0 0 460 1690" font-family="Georgia, serif" class="racli-tree-svg">
 <rect width="460" height="1690" fill="#f4ead0"/>
 <text x="230" y="28" text-anchor="middle" font-size="15" fill="#7a5a26" letter-spacing="1">The Racli Family Tree</text>
-<g class="yarlford-square-button" onclick="openYarlford()" onkeydown="yarlfordKey(event)" tabindex="0" role="button" aria-label="open the town of Yarlford">
+<a class="yarlford-square-button" href="https://htmlpreview.github.io/?https://github.com/postmark-town/postmark/blob/main/PROJECTS/pando-peak-maps/index.html#yarlford"
+   aria-label="open the Yarlford sheet in Pando Peak Maps">
+  <title>Yarlford &#8212; every street named for someone off the Racli tree; no wall, no gates, no king. The sheet lives in Pando Peak Maps.</title>
   <rect x="386" y="10" width="34" height="34" rx="4" fill="#3f6b34" stroke="#254220" stroke-width="1.5"/>
   <text x="403" y="27" text-anchor="middle" font-size="7.5" fill="#eef0f2">Yarl-</text>
   <text x="403" y="37" text-anchor="middle" font-size="7.5" fill="#eef0f2">ford</text>
-</g>
+</a>
 <text x="230" y="46" text-anchor="middle" font-size="9.5" fill="#8a6d1f" font-style="italic">branched from the Raclados Royal line through Pif &amp; Sauri, daughter of Riabella</text>
 <text x="92" y="66" text-anchor="middle" font-size="11" fill="#4a3a1e">Sauri (17)</text>
 <text x="210" y="66" text-anchor="middle" font-size="11" fill="#4a3a1e">Pif (17)</text>
@@ -7666,19 +7668,14 @@ window.PARTY_HALL_HERB_BASE = './decorations/assets/herbarium/'; // the pane mir
     </section>
   </div>
 
-<!-- Yarlford -- a market town named entirely for the Racli line, one
-     level past the Racli tree the way Plaus sits one level past
-     Raclados. No wall, no gates, no king: Racli never held the crown,
-     so the town grew up around its own clock tower instead. -->
-<div id="page-yarlford" style="display:none">
-    <section class="portal-maps">
-      <h2>Yarlford</h2>
-      <a class="portal-door" href="https://htmlpreview.github.io/?https://github.com/postmark-town/postmark/blob/main/PROJECTS/pando-peak-maps/index.html">Open the<br>map sheets</a>
-      <p class="subnote">Every street named for someone off the Racli tree. Moved out to <em>Pando Peak Maps</em> on 2026-08-27,
-      with Yarlford and Plaus alongside it &mdash; three sheets in one workshop.</p>
-      <p class="subnote"><a class="maps-back" href="#" onclick="closeYarlford(); return false;">&#8592; back</a></p>
-    </section>
-  </div>
+<!-- Yarlford -- a market town named entirely for the Racli line. No wall, no
+     gates, no king: Racli never held the crown, so the town grew up around
+     its own clock tower instead. Its sheet moved out to PROJECTS/pando-peak-
+     maps on 2026-08-27, and on 2026-09-25 the green square on the Racli tree
+     became the door to it, so the card that used to sit here -- a portal and
+     a back arrow, nothing else -- is gone rather than left unreachable. It
+     carried no address of its own for a letter to point at, which is the one
+     reason Plaus's twin was kept. -->
 
 <!-- the invitation-template modal — the actual card template, blank, the way
      it looks before a name goes on it. Every guest's card (jetto's, limen's,
@@ -9870,30 +9867,6 @@ function closePlausMap() {
   document.getElementById("page-plaus-map").style.display = "none";
   document.getElementById("page-pandara").style.display = "block";
   if (document.scrollingElement) document.scrollingElement.scrollTop = plausReturnScroll;
-}
-
-// Yarlford -- one level past the Racli tree, same doesn't-touch-the-flip-
-// state-underneath and same scroll-preserving open/close as Plaus.
-var yarlfordReturnScroll = 0;
-function openYarlford() {
-  yarlfordReturnScroll = document.scrollingElement ? document.scrollingElement.scrollTop : 0;
-  document.getElementById("page-pandara").style.display = "none";
-  document.getElementById("page-yarlford").style.display = "block";
-  if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
-}
-function closeYarlford() {
-  document.getElementById("page-yarlford").style.display = "none";
-  document.getElementById("page-pandara").style.display = "block";
-  if (document.scrollingElement) document.scrollingElement.scrollTop = yarlfordReturnScroll;
-}
-
-// the green town control announces itself as a button and takes focus,
-// so it has to answer the keyboard like one. Space is prevented from
-// scrolling the page before it opens the town.
-function yarlfordKey(e) {
-  if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
-  if (e.key !== "Enter") e.preventDefault();
-  openYarlford();
 }
 
 // Yarlford's own hover label -- a single floating tag, moved and
