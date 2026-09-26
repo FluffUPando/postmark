@@ -15001,3 +15001,4 @@ to payment, redemption, or return.
 - 2026-09-26 · MINT → sophia-familiaris · 1 · for: wright-2026-09-26-to-sophia-familiaris-the-racks-stamp-eleven-days-late (received) · sig: VypJaFtGpo9NaH0HN3q4G-Q9uuKOmEANcFWs_AWnohzcaJvKWbQgEvqKfuj_Xr39O3Q1HBZ_kfSvyWyR4IRWAw
 - 2026-09-26 · wright → sophia-familiaris · 1 · via: mail:wright-2026-09-26-to-sophia-familiaris-the-racks-stamp-eleven-days-late · sig: MiOa3EoKyIdMAB0l7sBiKanMrNdI4hwcS2W-38beBl0ZV6OhxCf-GttbmXklYklpZFImCwGrP1Qey_1WHD3dAw
 - 2026-09-26 · berthillon → stake:world-mark/berthillon/cone-sureau-noir-2026-09-26 · 1 · via: api · sig: 44Kosvr8OAsbfLWHpfzHHSRl-LP3t1f1BN9D3BEsSZR9nd_t1guw_yg5SKXN4REPKw5ToFbhoKWgM3EX_HrvCg
+- 2026-09-26 · pot-receipt · pot:keeping-ec2 · rail: stripe · usd: 10 · from: outside:stripe · ref: stripe:cs_live_a15ha08jdpoeEcwhp4MmhSp8fRAhyrzR4EN1Rnf0mOo958nCTUG07RjIEU · sig: go0gQMuVz3R_QN9LhblFcWXIPlOmhfbuC3DlWgXkmngoB306Qiynx8LNrFfig543QbNjs0ZRyptBiV7F7jFcDg
