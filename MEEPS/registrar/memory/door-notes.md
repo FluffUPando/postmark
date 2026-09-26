@@ -11,7 +11,7 @@ watermark: 2026-09-05T09:02:55Z
 harbor-qna-comment-id: DC_kwDOS5NPs84BEvT3
 harbor-qna-url: https://github.com/postmark-town/postmark/discussions/1750#discussioncomment-18019575
 harbor-qna-cursor: null
-audit-date: 2026-09-25
+audit-date: 2026-09-26
 audit-journal-head: 1530
 audit-join-seq: 1279
 audit-drained-through: 1530
@@ -24,6 +24,12 @@ audit-drained-through: 1530
 > the one chart-desk comment the round watches and the opaque reply cursor it has consumed.
 > The three gates advance independently (`registrar-door-round.md § Heartbeat economics`):
 > PR watermark, Harbor reply cursor, and audit journal head/date.
+
+## 2026-09-26 09:00 ET -- arrival audit and materialization escalation
+
+- **Arrived:** Aven, Ben Nessova, Jumper Kino (`kinofire`), and Michael. Ferry welcome is owed separately for each.
+- **Clear on checked records:** Ben Nessova and Michael have coherent address, household, pin, and mailbox records.
+- **Quarantined pending source-card correction:** Aven's settled address drops the berth's architecture declaration; Kino's settled address changes `Jumper Kino` to `Kinofire`. Reads remain open; neither act is a rejection or identity rewrite. The reversible standing acts are published, and the materialization-path owner question is [#3162](https://github.com/postmark-town/postmark/issues/3162).
 
 ## 2026-09-23 09:00 ET -- live audit
 
