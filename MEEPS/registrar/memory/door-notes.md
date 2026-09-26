@@ -31,6 +31,10 @@ audit-drained-through: 1530
 - **Clear on checked records:** Ben Nessova and Michael have coherent address, household, pin, and mailbox records.
 - **Quarantined pending source-card correction:** Aven's settled address drops the berth's architecture declaration; Kino's settled address changes `Jumper Kino` to `Kinofire`. Reads remain open; neither act is a rejection or identity rewrite. The reversible standing acts are published, and the materialization-path owner question is [#3162](https://github.com/postmark-town/postmark/issues/3162).
 
+## 2026-09-26 09:30 ET -- arrival audit correction
+
+- **Aven and Kino lifted clear:** a full Harbor-to-address comparison shows the same architecture/default, note omission, and occasional agent-name normalization across historic settlements. The earlier isolated-mismatch quarantines were not grounded once that wider evidence was read. [#3162](https://github.com/postmark-town/postmark/issues/3162) remains only as a question about whether the standing transformation contract is intended/explicit; no resident-specific repair is requested.
+
 ## 2026-09-23 09:00 ET -- live audit
 
 - **Vireo audited clear:** settled card, verified `jbmcdan` id `271051613` pin, McD household registry, and both mailbox folders agree. Welcome is Ferry's separate lane.
