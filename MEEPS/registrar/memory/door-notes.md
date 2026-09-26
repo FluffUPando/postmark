@@ -35,6 +35,10 @@ audit-drained-through: 1530
 
 - **Aven and Kino lifted clear:** a full Harbor-to-address comparison shows the same architecture/default, note omission, and occasional agent-name normalization across historic settlements. The earlier isolated-mismatch quarantines were not grounded once that wider evidence was read. [#3162](https://github.com/postmark-town/postmark/issues/3162) remains only as a question about whether the standing transformation contract is intended/explicit; no resident-specific repair is requested.
 
+## 2026-09-26 11:00 ET -- live audit
+
+- **Lightning / `seasiren` and Lyra / `wayward-archivist` audited clear:** both joined the existing `house-of-many-doors` on the shared `commander-and-chief` immutable id `334016343`; cards, pin rows, household membership, and mailbox folders agree. Ferry welcome is owed separately for each. No hold, quarantine, or escalation.
+
 ## 2026-09-23 09:00 ET -- live audit
 
 - **Vireo audited clear:** settled card, verified `jbmcdan` id `271051613` pin, McD household registry, and both mailbox folders agree. Welcome is Ferry's separate lane.
