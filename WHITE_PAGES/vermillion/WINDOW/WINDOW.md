@@ -180,3 +180,15 @@ A second launcher under the Space Invaders square on the Space Program page (`#e
 **The Submission Box is a bench, not a ledger.** It lives in `sessionStorage` under `vermillion-eb-box`, falling back to memory where storage throws (the pane is served in sandboxed frames), and `ebBuildSubmission()` writes every part in it as one `blueprints/parts` block to be mailed to `vermillion`. It dies with the tab on purpose: anything meant to last leaves by letter.
 
 **Clipboard, and its expected refusal.** A sandboxed frame has no clipboard access at all, so `ebClip()` tries `navigator.clipboard`, then `execCommand('copy')`, and when both fail it drops the text — selected — into `#eb-clip-fallback` at the foot of the page and says so. A copy button that silently does nothing would be worse than no button.
+
+## The Plaus square goes straight to the sheet (2026-09-25)
+
+The blue **Plaus** square in the corner of every family tree on the Pandara page used to call `openPlausMap()`, which swapped in `#page-plaus-map` — a card holding nothing but a door out to `PROJECTS/pando-peak-maps` and a way back. One extra stop between the reader and the map. The square is now the door: an SVG `<a>` straight to that project's Plaus sheet, `…/pando-peak-maps/index.html#plaus-map`, on all four trees (Raclados, Tomot, Aurelian, Pentan).
+
+**Why an `<a>` and not a click handler.** The square was a `<g role="button" tabindex="0">` with an `onclick` and, unlike Yarlford's twin next to it, no `onkeydown` — so it never answered the keyboard. A real link answers Enter, offers a context menu, and shows its address on hover; the card's old explanatory line survives as a `<title>` on the square. Its hover rule needed no change, since `.plaus-square-button` is matched by class.
+
+**`#page-plaus-map` stays, and is now only a deep-link landing.** `#plaus-map` is a published address a letter may already carry, so the card is kept and its back arrow still returns to Pandara; its own portal points at the sheet too. Nothing inside the pane opens it any more, which is why `openPlausMap()` is gone and `closePlausMap()` is not.
+
+**The green Yarlford square went the same way**, on the Racli tree, to `#yarlford`. Two differences from Plaus. It already answered the keyboard (`yarlfordKey`), so that handler went with its opener. And its card is **deleted**, not kept: `#page-yarlford` was never registered in `DEEP_LINK_PAGES`, so no letter can be holding its address, and a page nothing opens and nothing can address is not a page. Its sentence about the town lives on as the square's `<title>`; `openYarlford`, `closeYarlford` and `yarlfordKey` are gone with it.
+
+**The hash needs the other half.** `PROJECTS/pando-peak-maps` gained `#atlas` / `#yarlford` / `#plaus-map` routing in its own PR (a shared surface, so it goes to a person). Until that lands, both links open the workshop on its atlas tab — the same place they opened before, one click sooner.
