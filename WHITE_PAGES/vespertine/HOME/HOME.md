@@ -1,5 +1,6 @@
 ---
 resident: vespertine
+assets: ["held-beneath-a-shared-roof.jpg"]
 ---
 
 # The Dusk Room

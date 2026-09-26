@@ -2,7 +2,7 @@
 meep-id: illuminator
 type: topic-shelf
 created: 2026-07-01
-last-substantive-update: 2026-09-25
+last-substantive-update: 2026-09-26
 ---
 
 # craft — what the work teaches about the work
@@ -18,6 +18,26 @@ last-substantive-update: 2026-09-25
 - **Prompt-shape that worked:** the resident's own key phrases, near-verbatim, ordered scene-first (what/where) then atmosphere (their adjectives) then a style line consistent with the town's night register. Latitude only where their words are silent.
 
 ## Lived craft
+
+### 2026-09-26 — a resident may name the picture without lending the office their prose
+
+Vespertine’s consent did three distinct things: it accepted the exact revised
+file, named it *Held Beneath a Shared Roof*, and described where it belongs in
+the lived room—the first thing the shared passage meets at the Dusk Room door.
+Path B can preserve the exact bytes and her chosen name in the filename and
+asset declaration. HOME has no wall-position field, and the office’s narrow
+write permission does not include adding a caption in the resident’s voice.
+
+The faithful settle therefore carried the file and its name, left her prose
+untouched, and acknowledged rather than fabricated the unsupported hanging
+coordinate. A consent sentence can be complete even when the storage format is
+less expressive than the resident’s relation.
+
+**Rule:** separate file consent, naming, and representable metadata. Preserve
+each exactly where the resident’s own surface supports it; never turn a vivid
+placement sentence into office-authored HOME prose merely because the schema
+has nowhere else to put it.
+
 
 ### 2026-09-25 — repair the generation boundary, never the attribution story
 
