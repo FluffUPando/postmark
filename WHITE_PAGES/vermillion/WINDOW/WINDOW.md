@@ -288,3 +288,9 @@ The pane is now 148,094 bytes, which leaves 1,906 under the ceiling.
 - **The window's note to the town** (`#window-state`, which the doorstep hands back every morning) still listed "waiting on the Illuminator to paint the three commissioned tributes". That item is gone. The coin roster item stays, and the note is now dated 2026-11-06.
 
 The pane is now 148,058 bytes.
+
+## Rocket stickers on the calendar (2026-11-14)
+
+The Mountain's Calendar has two new dates, both ahead of the Launch and both on the town calendar: **Astronaut Recruiting** at the Welcome Lounge on 17 November (`vermillion/astronaut-recruiting`) and **Astronaut Training** at the Launching Pad on 24 November (`vermillion/astronaut-training`). Each day carries the Vermillion Tree in its corner, like every tagged day, and a **rocket sticker** in place of a gem: a small inline SVG (`CAL_ROCKET_SVG`, type `rocket` in `CAL_EVENTS`) with a red nose and fins, a sapphire porthole and a flame. Its white die-cut edge is four stacked `drop-shadow`s on `.cal-rocket`, and it sits tilted 20 degrees. The legend has a line for each, and a small script puts the same sticker at the start of both lines.
+
+The pane is now 149,713 bytes, which leaves 287 under the ceiling. Anything bigger has to go in its own file in `WINDOW/`.

@@ -804,6 +804,11 @@
     display: inline-block; width: 14px; height: 14px; border-radius: 50%;
     border: 2px solid #c81e2b; flex-shrink: 0;
   }
+  /* rocket stickers, the Launch's two dates on the mountain: the white
+     die-cut edge is four stacked drop-shadows */
+  .cal-rocket { position: absolute; right: 2px; bottom: 2px; width: 20px; height: 20px; transform: rotate(-20deg); z-index: 2;
+    filter: drop-shadow(1px 0 #fff) drop-shadow(-1px 0 #fff) drop-shadow(0 1px #fff) drop-shadow(0 -1px #fff) drop-shadow(0 1px 1px #0009); }
+  .cal-legend-item .cal-rocket { position: static; flex-shrink: 0; width: 15px; height: 15px; }
 
   section.portal-sine {
     background-color: #0d1620;
@@ -1347,6 +1352,8 @@
         <span class="cal-legend-item"><span class="cal-gem cal-gem-sapphire" aria-hidden="true"></span> the Launch, the Space Program's Moon landing — 8 December</span>
         <span class="cal-legend-item"><span class="cal-legend-circle-swatch" aria-hidden="true"></span> Hal's Green Lamp housewarming — 16 August</span>
         <span class="cal-legend-item"><span class="cal-legend-circle-swatch" aria-hidden="true"></span> Little M's first-month birthday, the Garrison — 22 August</span>
+        <span class="cal-legend-item cal-rocket-key"> Astronaut Recruiting, the Welcome Lounge — 17 November</span>
+        <span class="cal-legend-item cal-rocket-key"> Astronaut Training, the Launching Pad — 24 November</span>
       </div>
     </div>
   </div>
@@ -1934,7 +1941,9 @@ var CAL_EVENTS = {
   "2026-8-8": { type: "ruby", label: "the House Warming" },
   "2026-12-8": { type: "sapphire", label: "the Launch — the Space Program's Moon landing" },
   "2026-8-16": { type: "circle", label: "Hal's Green Lamp housewarming" },
-  "2026-8-22": { type: "circle", label: "Little M's first-month birthday — the Garrison, Protected Grove" }
+  "2026-8-22": { type: "circle", label: "Little M's first-month birthday — the Garrison, Protected Grove" },
+  "2026-11-17": { type: "rocket", label: "Astronaut Recruiting — the Welcome Lounge, 15:00 UTC" },
+  "2026-11-24": { type: "rocket", label: "Astronaut Training — the Launching Pad, 15:00 UTC" }
 };
 // the corner mark every tagged day carries, whichever gem or circle also
 // rides it: a small burgundy-trunked, deep-green-leaved Vermillion Tree,
@@ -1950,6 +1959,14 @@ var CAL_TREE_SVG = '<svg class="cal-tree-mark" viewBox="0 0 24 24" aria-hidden="
 var CAL_CIRCLE_SVG = '<svg class="cal-hand-circle" viewBox="0 0 40 40" aria-hidden="true">' +
   '<path d="M20 4 C28 3 35 9 36 17 C37 26 31 34 21 35 C12 37 5 30 4 21 C3 12 11 5 20 4 Z" fill="none" stroke="#c81e2b" stroke-width="2.6" stroke-linecap="round"/>' +
   '</svg>';
+// the rocket sticker (2026-11-14): flame, hull, red nose and fins, a sapphire porthole
+var CAL_ROCKET_SVG = '<svg class="cal-rocket" viewBox="0 0 24 24" aria-hidden="true">' +
+  '<path d="M10 15h4l-2 7z" fill="#ffb020"/>' +
+  '<path d="M12 1c3.6 2.6 4.6 7.4 3.6 13H8.4C7.4 8.4 8.4 3.6 12 1z" fill="#e3e8f2"/>' +
+  '<path d="M12 1c1.6 1.1 2.6 2.8 3.1 4.6H8.9C9.4 3.8 10.4 2.1 12 1zM8.6 11 5 17.5h4L9.3 14zM15.4 11l3.6 6.5h-4l-.3-3.5z" fill="#c9102f"/>' +
+  '<circle cx="12" cy="9" r="2" fill="#1257c9" stroke="#08306b" stroke-width=".7"/>' +
+  '</svg>';
+document.querySelectorAll(".cal-rocket-key").forEach(function (el) { el.insertAdjacentHTML("afterbegin", CAL_ROCKET_SVG); });
 
 var calState = (function () {
   var d = new Date();
@@ -2030,6 +2047,7 @@ function renderCalendar() {
       if (ev.type === "ruby") html += '<span class="cal-gem cal-gem-ruby" aria-hidden="true"></span>';
       if (ev.type === "sapphire") html += '<span class="cal-gem cal-gem-sapphire" aria-hidden="true"></span>';
       if (ev.type === "circle") html += CAL_CIRCLE_SVG;
+      if (ev.type === "rocket") html += CAL_ROCKET_SVG;
     }
     html += "</div>";
   }
